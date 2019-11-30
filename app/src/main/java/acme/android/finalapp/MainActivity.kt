@@ -1,6 +1,7 @@
 package acme.android.finalapp
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
@@ -23,6 +24,7 @@ class MainActivity : BlankFragment.OnFragmentInteractionListener, AppCompatActiv
         //add in an example fragment. copy and replace this call in fabmenu listener meathod.
         supportFragmentManager.beginTransaction().replace(R.id.fragmentFrame, BlankFragment.newInstance("", "")).commit()
 
+        iniFM()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -45,6 +47,26 @@ class MainActivity : BlankFragment.OnFragmentInteractionListener, AppCompatActiv
     private var showfmenu: Boolean = false
 
 
+    private fun log(msg:String){
+        Log.d("Movie APP: ", msg)
+    }
+    private fun iniFM(){
+        fab1.setOnClickListener {  }
+        fab1.setOnLongClickListener{
+            log("Recent")
+            return@setOnLongClickListener true
+        }
+        fab2.setOnClickListener {  }
+        fab2.setOnLongClickListener{
+            log("Categories")
+            return@setOnLongClickListener true
+        }
+        fab3.setOnClickListener {  }
+        fab3.setOnLongClickListener{
+            log("Favorites")
+            return@setOnLongClickListener true
+        }
+    }
     private fun showFM() {
         showfmenu = true
 
