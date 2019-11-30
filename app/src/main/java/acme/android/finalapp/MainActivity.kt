@@ -50,6 +50,7 @@ class MainActivity : BlankFragment.OnFragmentInteractionListener, AppCompatActiv
     private fun log(msg:String){
         Log.d("Movie APP: ", msg)
     }
+    
     private fun iniFM(){
         fab1.setOnClickListener {  }
         fab1.setOnLongClickListener{
