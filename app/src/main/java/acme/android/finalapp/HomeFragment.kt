@@ -39,13 +39,17 @@ class HomeFragment : Fragment() {
     }
 
     fun processData(data: String){
-        log(data.toString())
+       // log(data.toString())
         var p = data.indexOf("Poster", 0, false)
         var temp = data.substring(p)
-        val c = temp.indexOf(',', 0)
+        var c = temp.indexOf(',', 0)
         val imgurl = temp.substring(9, c-1)
         subtext?.text = imgurl
         poster?.loadUrl(  imgurl )
+        p = data.indexOf("Title", 0, false)
+        temp = data.substring(p)
+        c = temp.indexOf(',', 0)
+        title?.text = temp.substring(8, c-1)
 
        // poster?.setImageURI(img)
     }
