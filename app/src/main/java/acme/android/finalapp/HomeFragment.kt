@@ -29,7 +29,10 @@ class HomeFragment : Fragment() {
 
     fun pickMovie(){
         Executors.newSingleThreadExecutor().execute({
-            val json = URL("http://www.omdbapi.com/?i=tt3896198&apikey=dd906fe0&r=json").readText()
+            val testurl = "http://www.omdbapi.com/?i=tt3896198&apikey=dd906fe0&r=json"
+            val queryurl = "http://www.omdbapi.com/?apikey=dd906fe0&s="
+            val test = queryurl + "Pulp"
+            val json = URL(test ).readText()
             subtext.post { subtext.text = json
             processData(json)}
         })
