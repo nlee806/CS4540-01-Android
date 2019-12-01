@@ -22,7 +22,7 @@ class MainActivity : BlankFragment.OnFragmentInteractionListener, AppCompatActiv
         }
 
         //add in an example fragment. copy and replace this call in fabmenu listener meathod.
-        supportFragmentManager.beginTransaction().replace(R.id.fragmentFrame, BlankFragment.newInstance("", "")).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragmentFrame, HomeFragment.newInstance()).commit()
 
         iniFM()
     }
@@ -50,7 +50,7 @@ class MainActivity : BlankFragment.OnFragmentInteractionListener, AppCompatActiv
     private fun log(msg:String){
         Log.d("Movie APP: ", msg)
     }
-    
+
     private fun iniFM(){
         fab1.setOnClickListener {  }
         fab1.setOnLongClickListener{
