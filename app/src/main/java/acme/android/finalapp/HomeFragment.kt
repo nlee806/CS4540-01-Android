@@ -20,14 +20,14 @@ import java.util.concurrent.Executors
 class HomeFragment : Fragment() {
     private var listener: BlankFragment.OnFragmentInteractionListener? = null
 
-    private var info :String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
     fun log(msg: String){ Log.d("Movies: ", msg)}
 
-    fun pickMovie(){
+    fun loadMovie(){
         Executors.newSingleThreadExecutor().execute({
             val testurl = "http://www.omdbapi.com/?i=tt3896198&apikey=dd906fe0&r=json"
             val queryurl = "http://www.omdbapi.com/?apikey=dd906fe0&s="
@@ -54,7 +54,6 @@ class HomeFragment : Fragment() {
         c = temp.indexOf(',', 0)
         title?.text = temp.substring(8, c-1)
 
-       // poster?.setImageURI(img)
     }
 
     override fun onCreateView(
@@ -64,7 +63,7 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         var v =  inflater.inflate(R.layout.fragment_home, container, false)
 
-        pickMovie()
+        loadMovie()
 
         return v
     }
