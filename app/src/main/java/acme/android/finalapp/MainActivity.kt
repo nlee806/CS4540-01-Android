@@ -6,6 +6,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.fragment.app.Fragment
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -21,10 +22,8 @@ class MainActivity : BlankFragment.OnFragmentInteractionListener, AppCompatActiv
              else hideFM()
         }
 
-        //add in an example fragment. copy and replace this call in fabmenu listener meathod.
-        supportFragmentManager.beginTransaction().replace(R.id.fragmentFrame, HomeFragment.newInstance()).commit()
-
-        iniFM()
+        showFrag(0) //show the "home fragment"
+        iniFM() //setup floating button menu
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -44,6 +43,20 @@ class MainActivity : BlankFragment.OnFragmentInteractionListener, AppCompatActiv
     }
 
 
+
+    private fun showFrag(op: Int){
+
+        var f : Fragment = HomeFragment.newInstance()
+        when(op){
+            0,2 -> f = BlankFragment.newInstance("", "") //replace with real fragments
+            1 -> f = HomeFragment.newInstance()
+        }
+
+
+        supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.slidein_up,
+            R.anim.slideout_down).replace(R.id.fragmentFrame,f).commit()
+
+    }
     private var showfmenu: Boolean = false
 
 
@@ -52,17 +65,17 @@ class MainActivity : BlankFragment.OnFragmentInteractionListener, AppCompatActiv
     }
 
     private fun iniFM(){
-        fab1.setOnClickListener {  }
+        fab1.setOnClickListener { showFrag(0) }
         fab1.setOnLongClickListener{
             log("Recent")
             return@setOnLongClickListener true
         }
-        fab2.setOnClickListener {  }
+        fab2.setOnClickListener { showFrag(1) }
         fab2.setOnLongClickListener{
             log("Categories")
             return@setOnLongClickListener true
         }
-        fab3.setOnClickListener {  }
+        fab3.setOnClickListener { showFrag(2) }
         fab3.setOnLongClickListener{
             log("Favorites")
             return@setOnLongClickListener true
