@@ -27,6 +27,10 @@ class MainActivity : FragmentListener, AppCompatActivity() {
     pick a fragment. add your name. commit. so we know everyone is online.!
 
     Fragments:
+    0 http://www.omdbapi.com/
+        parse the returned json. format return 'movie' datatype -
+        http://www.omdbapi.com/?i=tt3896198&apikey=dd906fe0
+        
     1 Home/Search fragment - Saul
     2 Favorites Fragment -
         -save imdb id (shared preference or external file) + download poster
@@ -51,7 +55,7 @@ class MainActivity : FragmentListener, AppCompatActivity() {
             R.anim.slideout_down).replace(R.id.fragmentFrame,f).commit()
 
     }
-    
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
