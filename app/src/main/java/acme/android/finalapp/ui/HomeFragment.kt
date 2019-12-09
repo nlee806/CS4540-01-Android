@@ -4,11 +4,15 @@ import acme.android.finalapp.R
 import acme.android.finalapp.helper.FragmentListener
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.net.URL
 import java.util.concurrent.Executors
@@ -25,20 +29,23 @@ class HomeFragment : Fragment() {
     }
     fun log(msg: String){ Log.d("Movies: ", msg)}
 
-    fun loadMovie(){
-        Executors.newSingleThreadExecutor().execute({
-            val testurl = "http://www.omdbapi.com/?i=tt3896198&apikey=dd906fe0&r=json"
-            val queryurl = "http://www.omdbapi.com/?apikey=dd906fe0&s="
-            val test = queryurl + "Pulp"
+    fun loadMovie(q :String){
+
+        val testurl = "http://www.omdbapi.com/?i=tt3896198&apikey=dd906fe0&r=json"
+        val queryurl = "http://www.omdbapi.com/?apikey=dd906fe0&s="
+        var test = queryurl + q
+        if(q.length == 0) test = testurl    //default to a known movie.
+        title?.text = test
+        Executors.newSingleThreadExecutor().execute{
             val json = URL(test ).readText()
             subtext.post { subtext.text = json
             processData(json)}
-        })
+        }
 
 
 
     }
-
+    //todo replace with full json parser.
     fun processData(data: String){
        // log(data.toString())
         var p = data.indexOf("Poster", 0, false)
@@ -61,7 +68,21 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         var v =  inflater.inflate(R.layout.fragment_home, container, false)
 
-        loadMovie()
+//        https://stackoverflow.com/questions/47298935/handling-enter-key-on-edittext-kotlin-android
+//        make text box act like a search bar, no need for system search.
+        //maybe hide/show with action bar icon.
+        val search:EditText = v.findViewById(R.id.searchText)
+        search.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                //Perform Code
+                loadMovie(search.text.toString())
+                return@OnKeyListener true
+            }
+            false
+        })
+
+        loadMovie("") //load a default page
+
 
         return v
     }
