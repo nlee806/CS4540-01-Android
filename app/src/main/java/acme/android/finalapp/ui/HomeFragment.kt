@@ -31,8 +31,8 @@ class HomeFragment : Fragment() {
 
     fun loadMovie(q :String){
 
-        val testurl = "http://www.omdbapi.com/?i=tt3896198&apikey=dd906fe0&r=json"
-        val queryurl = "http://www.omdbapi.com/?apikey=dd906fe0&s="
+        val testurl = getString(R.string.testapiurl)
+        val queryurl = getString(R.string.apiqueryurl)
         var test = queryurl + q
         if(q.length == 0) test = testurl    //default to a known movie.
         title?.text = test
