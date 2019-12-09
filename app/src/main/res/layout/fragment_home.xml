@@ -8,8 +8,18 @@
     <LinearLayout
         android:id="@+id/textbox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/searchText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:text="@string/searchboxdefault"
+            android:textAlignment="center"
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/title"

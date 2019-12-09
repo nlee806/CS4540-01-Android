@@ -2,7 +2,9 @@ package acme.android.finalapp
 
 import acme.android.finalapp.helper.FragmentListener
 import acme.android.finalapp.ui.BlankFragment
+import acme.android.finalapp.ui.BlankFragment2
 import acme.android.finalapp.ui.HomeFragment
+import acme.android.finalapp.ui.SplashFragment
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -30,7 +32,7 @@ class MainActivity : FragmentListener, AppCompatActivity() {
     0 http://www.omdbapi.com/
         parse the returned json. format return 'movie' datatype -
         http://www.omdbapi.com/?i=tt3896198&apikey=dd906fe0
-        
+
     1 Home/Search fragment - Saul
     2 Favorites Fragment -
         -save imdb id (shared preference or external file) + download poster
@@ -46,8 +48,9 @@ class MainActivity : FragmentListener, AppCompatActivity() {
         //add new fragment calls here.
         var f : Fragment = HomeFragment.newInstance()
         when(op){
-            0,2 -> f = BlankFragment.newInstance("", "") //replace with real fragments
+            0 -> f = SplashFragment.newInstance()
             1 -> f = HomeFragment.newInstance()
+            2 -> f = BlankFragment2()
         }
 
 
@@ -59,6 +62,7 @@ class MainActivity : FragmentListener, AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme_NoActionBar)  //reset the base theme. remove the slash screen logo.
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
