@@ -23,12 +23,6 @@ class HomeFragment : Fragment() {
 
     //home fragment show last user search, or a random title.
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-    fun log(msg: String){ Log.d("Movies: ", msg)}
-
     fun loadMovie(q :String){
 
         val testurl = getString(R.string.testapiurl)
@@ -60,6 +54,19 @@ class HomeFragment : Fragment() {
         title?.text = temp.substring(8, c-1)
 
     }
+
+
+    /*
+    ---------------------------------------------------------------------------------------
+                required fragment stuff
+     */
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+    fun log(msg: String){ Log.d("Movies: ", msg)}
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -109,4 +116,10 @@ class HomeFragment : Fragment() {
             HomeFragment().apply {
             }
     }
+
+    /*
+    ---------------------------------------------------------------------------------------
+                required fragment stuff
+     */
+
 }

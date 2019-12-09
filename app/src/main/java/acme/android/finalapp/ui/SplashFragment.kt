@@ -25,6 +25,11 @@ class SplashFragment : Fragment() {
     //splash/start up screen fragment. not needed.
 
 
+    /*
+    ---------------------------------------------------------------------------------------
+                required fragment stuff
+     */
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -67,4 +72,10 @@ class SplashFragment : Fragment() {
             SplashFragment().apply {
             }
     }
+
+    /*
+    ---------------------------------------------------------------------------------------
+                required fragment stuff
+     */
+
 }
