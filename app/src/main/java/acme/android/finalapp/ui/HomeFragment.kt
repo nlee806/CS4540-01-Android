@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
         title?.text = test
         Executors.newSingleThreadExecutor().execute{
             val json = URL(test ).readText()
-            subtext.post { subtext.text = json
+            subtext.post { subtext.text = q
             processData(json)}
         }
 
