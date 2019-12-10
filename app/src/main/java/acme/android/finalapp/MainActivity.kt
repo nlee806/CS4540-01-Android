@@ -38,7 +38,7 @@ class MainActivity : FragmentListener, AppCompatActivity() {
     3 Browse (Abc/genre/year...?) -
             scraping imdb?
 
-    4 watch trailers? new/popular
+    4 watch trailers? new/popular - Nathan
     5   another thing. idk...
      */
 
