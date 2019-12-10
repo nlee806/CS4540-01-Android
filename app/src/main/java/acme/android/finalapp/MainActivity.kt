@@ -1,7 +1,9 @@
 package acme.android.finalapp
 
 import acme.android.finalapp.helper.FragmentListener
-import acme.android.finalapp.ui.*
+import acme.android.finalapp.ui.BlankFragment
+import acme.android.finalapp.ui.HomeFragment
+import acme.android.finalapp.ui.SplashFragment
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -47,7 +49,7 @@ class MainActivity : FragmentListener, AppCompatActivity() {
         when(op){
             0 -> f = SplashFragment.newInstance()
             1 -> f = HomeFragment.newInstance()
-            2 -> f = Fragment_2()
+            2 -> f = BlankFragment.newInstance("", "")
         }
 
 
