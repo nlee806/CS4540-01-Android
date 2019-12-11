@@ -2,15 +2,12 @@ package acme.android.finalapp
 
 import acme.android.finalapp.helper.FragmentListener
 import acme.android.finalapp.ui.BlankFragment
-import acme.android.finalapp.ui.Fragment_2
 import acme.android.finalapp.ui.HomeFragment
 import acme.android.finalapp.ui.SplashFragment
+import acme.android.finalapp.ui.VideoFragment
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import androidx.fragment.app.Fragment
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -51,7 +48,7 @@ class MainActivity : FragmentListener, AppCompatActivity() {
         when(op){
             0 -> f = SplashFragment.newInstance()
             1 -> f = HomeFragment.newInstance()
-            2 -> f = BlankFragment.newInstance("", "")
+            2 -> f = VideoFragment.newInstance()
             }
 
 
