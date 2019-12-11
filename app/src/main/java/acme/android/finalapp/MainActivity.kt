@@ -2,6 +2,7 @@ package acme.android.finalapp
 
 import acme.android.finalapp.helper.FragmentListener
 import acme.android.finalapp.ui.BlankFragment
+import acme.android.finalapp.ui.Fragment_2
 import acme.android.finalapp.ui.HomeFragment
 import acme.android.finalapp.ui.SplashFragment
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.fragment.app.Fragment
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -50,7 +52,7 @@ class MainActivity : FragmentListener, AppCompatActivity() {
             0 -> f = SplashFragment.newInstance()
             1 -> f = HomeFragment.newInstance()
             2 -> f = BlankFragment.newInstance("", "")
-        }
+            }
 
 
         supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.slidein_up,
@@ -93,6 +95,7 @@ class MainActivity : FragmentListener, AppCompatActivity() {
             log("Favorites")
             return@setOnLongClickListener true
         }
+
     }
     private fun showFM() {
         showfmenu = true
@@ -102,6 +105,7 @@ class MainActivity : FragmentListener, AppCompatActivity() {
         fab2.animate().translationY(c*2)
         fab3.animate().translationY(c*3)
 
+
     }
 
     private fun hideFM() {
@@ -109,8 +113,7 @@ class MainActivity : FragmentListener, AppCompatActivity() {
         fab1.animate().translationY(0f)
         fab2.animate().translationY(0f)
         fab3.animate().translationY(0f)
-
-    }
+            }
 
     /* ---------- Floating button Menu ------------- */
 
