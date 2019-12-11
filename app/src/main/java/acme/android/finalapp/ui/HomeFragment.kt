@@ -2,6 +2,7 @@ package acme.android.finalapp.ui
 
 import acme.android.finalapp.R
 import acme.android.finalapp.helper.FragmentListener
+import acme.android.finalapp.helper.OmdbHelpber
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
@@ -41,17 +42,21 @@ class HomeFragment : Fragment() {
     }
     //todo replace with full json parser.
     fun processData(data: String){
-       // log(data.toString())
-        var p = data.indexOf("Poster", 0, false)
-        var temp = data.substring(p)
-        var c = temp.indexOf(',', 0)
-        val imgurl = temp.substring(9, c-1)
-        subtext?.text = imgurl
-        poster?.loadUrl(  imgurl )
-        p = data.indexOf("Title", 0, false)
-        temp = data.substring(p)
-        c = temp.indexOf(',', 0)
-        title?.text = temp.substring(8, c-1)
+
+        var result: HashMap<String, String> = OmdbHelpber.getMap(data)
+
+        //print raw/ processed
+        log(data)
+        log("res: " + result.toString())
+
+        val tt : String? = result.get("Title")
+        if(tt != null)
+        log( tt )
+        title?.text = tt
+        subtext?.text = result.get("Plot")
+        val img = result.get("Poster")
+        log(img.toString())
+        poster?.loadUrl( img )
 
     }
 
