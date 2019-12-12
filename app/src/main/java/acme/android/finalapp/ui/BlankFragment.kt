@@ -23,6 +23,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [BlankFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
+ * auto generated fragment for reference.
  */
 
 class BlankFragment : Fragment() {
