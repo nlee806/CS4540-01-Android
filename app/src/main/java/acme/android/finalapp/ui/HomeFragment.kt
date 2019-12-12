@@ -43,21 +43,32 @@ class HomeFragment : Fragment() {
     //todo replace with full json parser.
     fun processData(data: String){
 
-        var result: HashMap<String, String> = OmdbHelpber.getMap(data)
+        if(data.substring(0, 10).contentEquals("{\"Search\":")){
+            //serarch result with multiple titles probably.
+            var sr : List<String> = data.split("{\"Title")
+            log(sr.toString())
+           // log(sr[1])
+            var fix = "{\"Title" + sr[1]
+            log(fix)
+            processData(fix)
+        }else {
 
-        //print raw/ processed
-        log(data)
-        log("res: " + result.toString())
 
-        val tt : String? = result.get("Title")
-        if(tt != null)
-        log( tt )
-        title?.text = tt
-        subtext?.text = result.get("Plot")
-        val img = result.get("Poster")
-        log(img.toString())
-        poster?.loadUrl( img )
+            var result: HashMap<String, String> = OmdbHelpber.getMap(data)
 
+            //print raw/ processed
+            log(data)
+            log("res: " + result.toString())
+
+            val tt: String? = result.get("Title")
+            title?.text = tt
+            subtext?.text = result.get("Plot")
+
+            val img = result.get("Poster")
+//        log(img.toString())
+            poster?.loadUrl(img)
+
+        }
     }
 
 
