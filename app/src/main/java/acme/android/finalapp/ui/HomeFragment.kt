@@ -52,7 +52,7 @@ class HomeFragment : Fragment() {
                     listener?.showResult(i-1, sr[i])
                 }
 //            log(fix)
-//            processData(fix)
+            processData(fix)
         }else {
 
 
