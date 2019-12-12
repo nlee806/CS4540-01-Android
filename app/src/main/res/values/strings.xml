@@ -5,6 +5,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="searchboxdefault">Search</string>
+    <string name="apiidurl"><![CDATA[http://www.omdbapi.com/?apikey=dd906fe0&i=]]></string>
     <string name="apiqueryurl"><![CDATA[http://www.omdbapi.com/?apikey=dd906fe0&s=]]></string>
     <string name="testapiurl"><![CDATA[http://www.omdbapi.com/?i=tt4154796&apikey=dd906fe0&r=json]]></string>
+    <string name="testjson">"{\"Title\":\"Iron Man\",\"Year\":\"2008\",\"imdbID\":\"tt0371746\",\"Type\":\"movie\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SX300.jpg\"},\n"</string>
 </resources>
