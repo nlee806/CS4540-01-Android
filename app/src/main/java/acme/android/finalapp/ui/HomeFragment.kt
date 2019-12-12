@@ -23,7 +23,11 @@ class HomeFragment : Fragment() {
     private var listener: FragmentListener? = null
 
 
-    //home fragment show last user search, or a random title = endgame. ^_-
+    /*home fragment show last user search, or a random title = endgame. ^_-
+    main fragment search omdb api
+    display top 3 results in sub Display fragments
+    display top result in this fragment
+     */
 
     fun loadMovie(data: String){
 
@@ -73,6 +77,7 @@ class HomeFragment : Fragment() {
 
     override fun onPause() {
         log("Home Frag Paused")
+        //save current search/results?
         super.onPause()
     }
 

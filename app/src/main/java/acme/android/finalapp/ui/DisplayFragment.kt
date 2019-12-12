@@ -50,10 +50,11 @@ class DisplayFragment : Fragment() {
        // v.findViewById<TextView>(R.id.dtvid).text = info.get("imdbID")
         dbid = info.get("imdbID")
         t?.setOnClickListener{
-
-            //val i = dtvid?.text.toString()
-             listener?.showInfo(dbid!!)
-
+             listener?.showResult(3, id!!) //show full page on click
+        }
+        t?.setOnLongClickListener{
+            listener?.showInfo(dbid!!)      //show raw info on long click
+            return@setOnLongClickListener true
         }
 
         v.findViewById<TextView>(R.id.dsubtext).text = info.get("Year")
