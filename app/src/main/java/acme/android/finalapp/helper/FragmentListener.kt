@@ -14,5 +14,6 @@ package acme.android.finalapp.helper
 interface FragmentListener {
     //notifiy the main activy of user input/send data back as arguments.
     fun returnSearchedInfo(id: String)
+    fun showInfo(id: String)
 
 }

@@ -10,7 +10,7 @@ import java.util.concurrent.Executors
 
 object OmdbHelpber{
 
-
+    //query key q, then notify fragment
     fun query(q :String, activity: Activity, p: TextView?, f: Fragment): String {
 
         val testurl = activity.getString(R.string.testapiurl)
@@ -32,8 +32,8 @@ object OmdbHelpber{
 
 
 
-
-        fun getMap(data : String) : HashMap<String, String>{
+    //process omdb json response, return hashmap<property, value>
+    fun getMap(data : String) : HashMap<String, String>{
         var map : HashMap<String, String> = HashMap()
         var e = data?.length
         val dat = data?.substring(2)

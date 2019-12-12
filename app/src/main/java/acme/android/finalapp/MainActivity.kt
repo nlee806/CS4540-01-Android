@@ -1,10 +1,7 @@
 package acme.android.finalapp
 
 import acme.android.finalapp.helper.FragmentListener
-import acme.android.finalapp.ui.BlankFragment
-import acme.android.finalapp.ui.HomeFragment
-import acme.android.finalapp.ui.SplashFragment
-import acme.android.finalapp.ui.VideoFragment
+import acme.android.finalapp.ui.*
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -118,8 +115,18 @@ class MainActivity : FragmentListener, AppCompatActivity() {
 
     /* ---------- Fragment callbacks ------------- */
 
+    override fun showInfo(id: String){
+
+        var f = InfoFragment.newInstance(id)
+
+        supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.slidein_up,
+            R.anim.slideout_down).replace(R.id.fragmentFrame,f).addToBackStack(null).commit()
+
+    }
 
     override fun returnSearchedInfo(id: String) {
         TODO("example call back.") //T
     }
+
+
 }

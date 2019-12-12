@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.net.URL
 import java.util.concurrent.Executors
@@ -25,6 +26,7 @@ class HomeFragment : Fragment() {
     //home fragment show last user search, or a random title.
 
     fun loadMovie(data: String){
+
         log("loading: " + data)
         OmdbHelpber.query(data, activity!!, title, this)
 
@@ -52,7 +54,7 @@ class HomeFragment : Fragment() {
             //print raw/ processed
             log(data)
             log("res: " + result.toString())
-
+            tvid?.text = result.get("imdbID")
             title?.text = result.get("Title")
             subtext?.text = result.get("Year")
 
@@ -95,9 +97,12 @@ class HomeFragment : Fragment() {
             false
         })
 
-
-        title?.text = "Enter a Title"
-        subtext?.text = ""
+        var title = v.findViewById<TextView>(R.id.title)
+        title?.setOnClickListener{
+            val id = tvid?.text.toString()
+            log("Home fragment Title clicked: " + id)
+            listener?.showInfo(id)
+        }
 
 
         return v
