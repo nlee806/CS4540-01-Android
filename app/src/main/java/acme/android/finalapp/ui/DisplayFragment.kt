@@ -13,7 +13,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import android.widget.EditText
+import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_display.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.title
@@ -31,12 +33,18 @@ class DisplayFragment : Fragment() {
     private var id : String? = null
     private val idkey = "Info"
 
-    fun loadDisplay(){
+    fun loadDisplay(v :View){
         log("Display fragment initializing.")
         log("info: "+ id)
         val info = OmdbHelpber.getMap(id!!)
-        title?.text = info.get("Title")
-        //subtext?.text = info.get("Director")
+        val p = v.findViewById<WebView>(R.id.dposter)   //this should be needed? but it is..!
+        p?.loadUrl(info.get("Poster"))
+        p?.settings?.loadWithOverviewMode = true
+        p?.settings?.useWideViewPort = true
+
+        val t = v.findViewById<TextView>(R.id.dtitle)
+        t?.text = info.get("Title")
+        v.findViewById<TextView>(R.id.dsubtext).text = info.get("Year")
     }
     /*
     ---------------------------------------------------------------------------------------
@@ -60,7 +68,7 @@ class DisplayFragment : Fragment() {
         // Inflate the layout for this fragment
         var v =  inflater.inflate(R.layout.fragment_display, container, false)
 
-        loadDisplay()
+        loadDisplay(v)
         return v
     }
 

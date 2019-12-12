@@ -38,12 +38,14 @@ class MainActivity : FragmentListener, AppCompatActivity() {
     5   another thing. idk...
      */
 
+    private val testdata = "{\"Title\":\"Iron Man\",\"Year\":\"2008\",\"imdbID\":\"tt0371746\",\"Type\":\"movie\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SX300.jpg\"},\n"
     private fun showFrag(op: Int){
 
         //add new fragment calls here.
         var f : Fragment = HomeFragment.newInstance()
         when(op){
-            0 -> f = SplashFragment.newInstance()
+            0 -> f = DisplayFragment.newInstance(testdata)
+//            0 -> f = SplashFragment.newInstance()
             1 -> f = HomeFragment.newInstance()
             2 -> f = VideoFragment.newInstance()
             }
