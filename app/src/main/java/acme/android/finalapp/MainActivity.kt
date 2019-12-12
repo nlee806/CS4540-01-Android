@@ -49,6 +49,7 @@ class MainActivity : FragmentListener, AppCompatActivity() {
             0 -> f = SplashFragment.newInstance()
             1 -> f = HomeFragment.newInstance()
             2 -> f = VideoFragment.newInstance()
+	    3 -> f = BlankFragment.newInstance()
             }
 
 
