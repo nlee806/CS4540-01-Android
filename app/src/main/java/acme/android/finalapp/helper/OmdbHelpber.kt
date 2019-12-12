@@ -1,11 +1,39 @@
 package acme.android.finalapp.helper
 
+import acme.android.finalapp.R
+import acme.android.finalapp.ui.HomeFragment
+import android.app.Activity
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import java.net.URL
+import java.util.concurrent.Executors
+
 object OmdbHelpber{
 
 
+    fun query(q :String, activity: Activity, p: TextView?, f: Fragment): String {
+
+        val testurl = activity.getString(R.string.testapiurl)
+        val queryurl = activity.getString(R.string.apiqueryurl)
+        var test = queryurl + q
+        if (q.length == 0) test = testurl    //default to a known movie.
+
+        var json = ""
+        Executors.newSingleThreadExecutor().execute {
+            json = URL(test).readText()
+            p?.post{
+                f as HomeFragment
+            f.processData(json)
+            }
+        }
+        return json
+    }
 
 
-    fun getMap(data : String) : HashMap<String, String>{
+
+
+
+        fun getMap(data : String) : HashMap<String, String>{
         var map : HashMap<String, String> = HashMap()
         var e = data?.length
         val dat = data?.substring(2)

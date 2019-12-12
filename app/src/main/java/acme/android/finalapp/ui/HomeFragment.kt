@@ -24,24 +24,17 @@ class HomeFragment : Fragment() {
 
     //home fragment show last user search, or a random title.
 
-    fun loadMovie(q :String){
-
-        val testurl = getString(R.string.testapiurl)
-        val queryurl = getString(R.string.apiqueryurl)
-        var test = queryurl + q
-        if(q.length == 0) test = testurl    //default to a known movie.
-        title?.text = test
-        Executors.newSingleThreadExecutor().execute{
-            val json = URL(test ).readText()
-            subtext.post { subtext.text = q
-            processData(json)}
-        }
-
-
+    fun loadMovie(data: String){
+        log("loading: " + data)
+        OmdbHelpber.query(data, activity!!, title, this)
 
     }
-    //todo replace with full json parser.
+
+
     fun processData(data: String){
+        log("pdata: " + data)
+        //check if its a search with multiple results
+        if(data.length < 1) return
 
         if(data.substring(0, 10).contentEquals("{\"Search\":")){
             //serarch result with multiple titles probably.
@@ -60,12 +53,10 @@ class HomeFragment : Fragment() {
             log(data)
             log("res: " + result.toString())
 
-            val tt: String? = result.get("Title")
-            title?.text = tt
-            subtext?.text = result.get("Plot")
+            title?.text = result.get("Title")
+            subtext?.text = result.get("Year")
 
             val img = result.get("Poster")
-//        log(img.toString())
             poster?.loadUrl(img)
 
         }
@@ -104,7 +95,9 @@ class HomeFragment : Fragment() {
             false
         })
 
-        loadMovie("") //load a default page
+
+        title?.text = "Enter a Title"
+        subtext?.text = ""
 
 
         return v
