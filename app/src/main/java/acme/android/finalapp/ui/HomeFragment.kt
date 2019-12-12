@@ -2,6 +2,7 @@ package acme.android.finalapp.ui
 
 import acme.android.finalapp.R
 import acme.android.finalapp.helper.FragmentListener
+import acme.android.finalapp.helper.OmdbHelpber
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
@@ -23,36 +24,42 @@ class HomeFragment : Fragment() {
 
     //home fragment show last user search, or a random title.
 
-    fun loadMovie(q :String){
-
-        val testurl = getString(R.string.testapiurl)
-        val queryurl = getString(R.string.apiqueryurl)
-        var test = queryurl + q
-        if(q.length == 0) test = testurl    //default to a known movie.
-        title?.text = test
-        Executors.newSingleThreadExecutor().execute{
-            val json = URL(test ).readText()
-            subtext.post { subtext.text = q
-            processData(json)}
-        }
-
-
+    fun loadMovie(data: String){
+        log("loading: " + data)
+        OmdbHelpber.query(data, activity!!, title, this)
 
     }
-    //todo replace with full json parser.
-    fun processData(data: String){
-       // log(data.toString())
-        var p = data.indexOf("Poster", 0, false)
-        var temp = data.substring(p)
-        var c = temp.indexOf(',', 0)
-        val imgurl = temp.substring(9, c-1)
-        subtext?.text = imgurl
-        poster?.loadUrl(  imgurl )
-        p = data.indexOf("Title", 0, false)
-        temp = data.substring(p)
-        c = temp.indexOf(',', 0)
-        title?.text = temp.substring(8, c-1)
 
+
+    fun processData(data: String){
+        log("pdata: " + data)
+        //check if its a search with multiple results
+        if(data.length < 1) return
+
+        if(data.substring(0, 10).contentEquals("{\"Search\":")){
+            //serarch result with multiple titles probably.
+            var sr : List<String> = data.split("{\"Title")
+            log(sr.toString())
+           // log(sr[1])
+            var fix = "{\"Title" + sr[1]
+            log(fix)
+            processData(fix)
+        }else {
+
+
+            var result: HashMap<String, String> = OmdbHelpber.getMap(data)
+
+            //print raw/ processed
+            log(data)
+            log("res: " + result.toString())
+
+            title?.text = result.get("Title")
+            subtext?.text = result.get("Year")
+
+            val img = result.get("Poster")
+            poster?.loadUrl(img)
+
+        }
     }
 
 
@@ -88,7 +95,9 @@ class HomeFragment : Fragment() {
             false
         })
 
-        loadMovie("") //load a default page
+
+        title?.text = "Enter a Title"
+        subtext?.text = ""
 
 
         return v
