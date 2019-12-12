@@ -40,22 +40,22 @@ class HomeFragment : Fragment() {
 
         if(data.substring(0, 10).contentEquals("{\"Search\":")){
             //serarch result with multiple titles probably.
+            //cut them up and send them to display fragments
             var sr : List<String> = data.split("{\"Title")
             log(sr.toString())
            // log(sr[1])
 
-            var fix = "{\"Title" + sr[1]
-            listener?.showResult(0, fix)
             if(sr.size > 3)
-                for(i in 2..3) {
+                for(i in 1..3) {
 
-                    listener?.showResult(i-1, sr[i])
+                    var fix = "{\"Title" + sr[i]
+                    listener?.showResult(i-1, fix)
+                    if(i == 1 ) processData(fix)    //show the first result as the main
                 }
-//            log(fix)
-            processData(fix)
+
         }else {
 
-
+            //single result returned. full info.
             var result: HashMap<String, String> = OmdbHelpber.getMap(data)
 
             //print raw/ processed
@@ -71,7 +71,16 @@ class HomeFragment : Fragment() {
         }
     }
 
+    override fun onPause() {
+        log("Home Frag Paused")
+        super.onPause()
+    }
 
+    override fun onResume() {
+        super.onResume()
+
+        log("Home Frag Resumed")
+    }
     /*
     ---------------------------------------------------------------------------------------
                 required fragment stuff

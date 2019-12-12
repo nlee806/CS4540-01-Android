@@ -25,25 +25,37 @@ import java.util.concurrent.Executors
 
 
 /*
-    info fragment expects a valid imdbid as string input to new instance factory method
-    display raw response json in scrolling text view
+    Dispaly fragment expects a omdb response JSON as string input to new instance factory method
+    display poster, title, year...only basics on multi response search.
  */
 class DisplayFragment : Fragment() {
     private var listener: FragmentListener? = null
     private var id : String? = null
     private val idkey = "Info"
-
+    private var dbid : String? = null
     fun loadDisplay(v :View){
         log("Display fragment initializing.")
         log("info: "+ id)
         val info = OmdbHelpber.getMap(id!!)
+        log("Title: " + info.get("Title"))
+
         val p = v.findViewById<WebView>(R.id.dposter)   //this should be needed? but it is..!
         p?.loadUrl(info.get("Poster"))
         p?.settings?.loadWithOverviewMode = true
         p?.settings?.useWideViewPort = true
 
+
         val t = v.findViewById<TextView>(R.id.dtitle)
         t?.text = info.get("Title")
+       // v.findViewById<TextView>(R.id.dtvid).text = info.get("imdbID")
+        dbid = info.get("imdbID")
+        t?.setOnClickListener{
+
+            //val i = dtvid?.text.toString()
+             listener?.showInfo(dbid!!)
+
+        }
+
         v.findViewById<TextView>(R.id.dsubtext).text = info.get("Year")
     }
     /*
