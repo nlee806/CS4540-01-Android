@@ -22,8 +22,8 @@ class VideoFragment : Fragment() {
     private var listener: FragmentListener? = null
 
 
-    //splash/start up screen fragment. not needed.
-
+    //What does this fragment do?
+    //nothing. why does it need 2 branches for this?
 
     /*
 
