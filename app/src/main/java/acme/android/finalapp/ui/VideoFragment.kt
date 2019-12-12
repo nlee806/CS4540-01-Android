@@ -79,4 +79,9 @@ class VideoFragment : Fragment() {
                 required fragment stuff
      */
 
+    override fun onPause(){
+        super.onPause()
+        
+    }
+
 }
