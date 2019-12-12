@@ -18,7 +18,7 @@ Browse and search movie and film titles with a compact android ui.
 - Clone or download this Repository
 
 ### Setup
-  File > New > import project
-  update build/gradle scripts (if needed)
-  connect Usb Device
-  click run on device
+-  File > New > import project
+-  update build/gradle scripts (if needed)
+-  connect Usb Device
+-  click run on device
