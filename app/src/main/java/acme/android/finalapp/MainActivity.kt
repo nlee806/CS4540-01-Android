@@ -124,6 +124,18 @@ class MainActivity : FragmentListener, AppCompatActivity() {
 
     }
 
+    override fun showResult(frame: Int, info: String){
+        //input full json response. just process and display. ie display fragment
+        val ff = intArrayOf ( R.id.subFrame, R.id.subFrame1, R.id.subFrame2)
+        var f = DisplayFragment.newInstance(info)
+        //this would be a good place for custom animations.
+        //there will be multiples of these so no backstack
+        supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.slidein_up,
+            R.anim.slideout_down).add(ff[frame],f).commit()
+
+    }
+
+
     override fun returnSearchedInfo(id: String) {
         TODO("example call back.") //T
     }

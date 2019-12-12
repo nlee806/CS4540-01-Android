@@ -14,7 +14,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import kotlinx.android.synthetic.main.fragment_display.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.title
 import kotlinx.android.synthetic.main.fragment_info.*
 import java.net.URL
 import java.util.concurrent.Executors
@@ -24,22 +26,17 @@ import java.util.concurrent.Executors
     info fragment expects a valid imdbid as string input to new instance factory method
     display raw response json in scrolling text view
  */
-class InfoFragment : Fragment() {
+class DisplayFragment : Fragment() {
     private var listener: FragmentListener? = null
     private var id : String? = null
-    private val idkey = "ID"
+    private val idkey = "Info"
 
-    fun loadInfo(){
-        var queryurl = getString(R.string.apiidurl)
-        queryurl += id
-        var json = ""
-        Executors.newSingleThreadExecutor().execute {
-            json = URL(queryurl).readText()
-            iinfo?.post{
-                iinfo?.text = json
-                log(json)
-            }
-        }
+    fun loadDisplay(){
+        log("Display fragment initializing.")
+        log("info: "+ id)
+        val info = OmdbHelpber.getMap(id!!)
+        title?.text = info.get("Title")
+        //subtext?.text = info.get("Director")
     }
     /*
     ---------------------------------------------------------------------------------------
@@ -53,7 +50,7 @@ class InfoFragment : Fragment() {
         }
 
     }
-    fun log(msg: String){ Log.d("Info Frag: ", msg)}
+    fun log(msg: String){ Log.d("Display Frag: ", msg)}
 
 
     override fun onCreateView(
@@ -61,9 +58,9 @@ class InfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var v =  inflater.inflate(R.layout.fragment_info, container, false)
+        var v =  inflater.inflate(R.layout.fragment_display, container, false)
 
-        loadInfo()
+        loadDisplay()
         return v
     }
 
@@ -86,7 +83,7 @@ class InfoFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance(id: String) =
-            InfoFragment().apply {
+            DisplayFragment().apply {
             arguments = Bundle().apply {
                 putString(idkey, id)
             }

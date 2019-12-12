@@ -23,7 +23,7 @@ class HomeFragment : Fragment() {
     private var listener: FragmentListener? = null
 
 
-    //home fragment show last user search, or a random title.
+    //home fragment show last user search, or a random title = endgame. ^_-
 
     fun loadMovie(data: String){
 
@@ -43,9 +43,16 @@ class HomeFragment : Fragment() {
             var sr : List<String> = data.split("{\"Title")
             log(sr.toString())
            // log(sr[1])
+
             var fix = "{\"Title" + sr[1]
-            log(fix)
-            processData(fix)
+            listener?.showResult(0, fix)
+            if(sr.size > 3)
+                for(i in 2..3) {
+
+                    listener?.showResult(i-1, sr[i])
+                }
+//            log(fix)
+//            processData(fix)
         }else {
 
 
