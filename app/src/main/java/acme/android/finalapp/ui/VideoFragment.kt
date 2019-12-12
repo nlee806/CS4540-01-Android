@@ -81,7 +81,7 @@ class VideoFragment : Fragment() {
 
     override fun onPause(){
         super.onPause()
-        
+
     }
 
 }
