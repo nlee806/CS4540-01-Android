@@ -40,6 +40,17 @@
             android:textAllCaps="false"
             android:textSize="14sp"  />
 
+
+        <TextView
+            android:id="@+id/tvid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:visibility="gone"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="14sp"  />
+
         <WebView
             android:id="@+id/poster"
             android:layout_width="match_parent"
