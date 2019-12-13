@@ -11,6 +11,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : FragmentListener, AppCompatActivity() {
     private var showfmenu: Boolean = false
+    private var showSecret: Boolean = false
+
+    val c = -133f;  //animation constant.
 
     private fun log(msg:String){   Log.d("Movie APP: ", msg) }
 
@@ -29,7 +32,7 @@ class MainActivity : FragmentListener, AppCompatActivity() {
             0 -> f = DisplayFragment.newInstance(getString(R.string.testjson))
 //            0 -> f = SplashFragment.newInstance()
             1 -> f = HomeFragment.newInstance()
-            2 -> f = VideoFragment.newInstance()
+            2 -> f = SplashFragment.newInstance()
             }
 
 
@@ -45,9 +48,13 @@ class MainActivity : FragmentListener, AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            if(!showfmenu) showFM()
-            else hideFM()
+        fab.setOnClickListener {  
+           toggleFM()
+        }
+        fab.setOnLongClickListener{
+            if(!showSecret) showSecret()
+            else hideSecret()
+            return@setOnLongClickListener true
         }
 
         showFrag(1) //show the "home fragment"
@@ -56,6 +63,10 @@ class MainActivity : FragmentListener, AppCompatActivity() {
     /* ---------- Floating button Menu ------------- */
 
 
+    private fun toggleFM(){
+        if(!showfmenu) showFM()
+        else hideFM()
+    }
     //main menu listener
     private fun iniFM(){
         fab1.setOnClickListener { showFrag(0) }
@@ -75,13 +86,23 @@ class MainActivity : FragmentListener, AppCompatActivity() {
         }
 
     }
+
+    private fun showSecret(){
+        showSecret = true
+        fab3.animate().translationY(c*3)
+        if(!showfmenu) showFM()     //clean hide effect.
+
+    }
+    private fun hideSecret(){
+        showSecret = false
+        fab3.animate().translationY(0f)
+    }
     private fun showFM() {
         showfmenu = true
 
-        val c = -133f;
         fab1.animate().translationY(c)
         fab2.animate().translationY(c*2)
-        fab3.animate().translationY(c*3)
+        //fab3.animate().translationY(c*3)
 
 
     }
@@ -90,7 +111,8 @@ class MainActivity : FragmentListener, AppCompatActivity() {
         showfmenu = false
         fab1.animate().translationY(0f)
         fab2.animate().translationY(0f)
-        fab3.animate().translationY(0f)
+        //fab3.animate().translationY(0f)
+        if(showSecret) hideSecret() //
             }
 
     /* ---------- Floating button Menu ------------- */
