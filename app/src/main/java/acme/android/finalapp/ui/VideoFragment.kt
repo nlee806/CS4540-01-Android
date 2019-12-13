@@ -46,6 +46,13 @@ class VideoFragment : Fragment() {
         // Inflate the layout for this fragment
         var v =  inflater.inflate(R.layout.fragment_video, container, false)
 
+        val apiKey = "" //must add API key here
+        //From TheMovieDataBase
+        val url = "https://api.themoviedb.org/3/movie/76341?api_key="+apiKey
+        Log.d("URL", url)
+        val result = URL(url).readText()
+        Log.d("Result", result)
+
         img = v.findViewById(R.id.splash)
         return v
     }
