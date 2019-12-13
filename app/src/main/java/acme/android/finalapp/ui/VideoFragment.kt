@@ -17,13 +17,13 @@ import android.widget.ImageView
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.net.URL
 import java.util.concurrent.Executors
+import android.os.Parcel;
+import android.os.Parcelable;
 
 class VideoFragment : Fragment() {
     private var listener: FragmentListener? = null
 
-
     //splash/start up screen fragment. not needed.
-
 
     /*
 
@@ -36,7 +36,6 @@ class VideoFragment : Fragment() {
 
     }
     fun log(msg: String){ Log.d("Movies: ", msg)}
-
 
     var img: ImageView? = null
 
