@@ -30,8 +30,6 @@ import android.net.Uri
 class VideoFragment : Fragment() {
     private var listener: FragmentListener? = null
 
-    //splash/start up screen fragment. not needed.
-
     /*
 
     ---------------------------------------------------------------------------------------

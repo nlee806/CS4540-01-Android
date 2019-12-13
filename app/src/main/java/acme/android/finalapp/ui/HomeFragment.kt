@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.net.URL
 import java.util.concurrent.Executors
@@ -22,9 +23,14 @@ class HomeFragment : Fragment() {
     private var listener: FragmentListener? = null
 
 
-    //home fragment show last user search, or a random title.
+    /*home fragment show last user search, or a random title = endgame. ^_-
+    main fragment search omdb api
+    display top 3 results in sub Display fragments
+    display top result in this fragment
+     */
 
     fun loadMovie(data: String){
+
         log("loading: " + data)
         OmdbHelpber.query(data, activity!!, title, this)
 
@@ -38,21 +44,28 @@ class HomeFragment : Fragment() {
 
         if(data.substring(0, 10).contentEquals("{\"Search\":")){
             //serarch result with multiple titles probably.
+            //cut them up and send them to display fragments
             var sr : List<String> = data.split("{\"Title")
             log(sr.toString())
            // log(sr[1])
-            var fix = "{\"Title" + sr[1]
-            log(fix)
-            processData(fix)
+
+            if(sr.size > 3)
+                for(i in 1..3) {
+
+                    var fix = "{\"Title" + sr[i]
+                    listener?.showResult(i-1, fix)
+                    if(i == 1 ) processData(fix)    //show the first result as the main
+                }
+
         }else {
 
-
+            //single result returned. full info.
             var result: HashMap<String, String> = OmdbHelpber.getMap(data)
 
             //print raw/ processed
             log(data)
             log("res: " + result.toString())
-
+            tvid?.text = result.get("imdbID")
             title?.text = result.get("Title")
             subtext?.text = result.get("Year")
 
@@ -62,7 +75,17 @@ class HomeFragment : Fragment() {
         }
     }
 
+    override fun onPause() {
+        log("Home Frag Paused")
+        //save current search/results?
+        super.onPause()
+    }
 
+    override fun onResume() {
+        super.onResume()
+
+        log("Home Frag Resumed")
+    }
     /*
     ---------------------------------------------------------------------------------------
                 required fragment stuff
@@ -95,9 +118,12 @@ class HomeFragment : Fragment() {
             false
         })
 
-
-        title?.text = "Enter a Title"
-        subtext?.text = ""
+        var title = v.findViewById<TextView>(R.id.title)
+        title?.setOnClickListener{
+            val id = tvid?.text.toString()
+            log("Home fragment Title clicked: " + id)
+            listener?.showInfo(id)
+        }
 
 
         return v
