@@ -1,7 +1,8 @@
 ##  Movies for Android
 Browse and search movie and film titles with a compact android ui.
 
-# Android Programming ProjectCS4540-CSULA-FALL 2019
+# Android Project CS4540
+- CSULA-FALL 2019
 
 - API - http://www.omdbapi.com/
 - The Open Movie Database
